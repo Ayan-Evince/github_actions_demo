@@ -5,9 +5,13 @@ on:
   push:
     branches:
       - main
-    pull_request:
-      branches:
-        - main
+  pull_request:
+    branches:
+      - main
+
+# Permissions for GITHUB_TOKEN (required to push to gh-pages)
+permissions:
+  contents: write
 
 # Jobs
 jobs:
@@ -39,13 +43,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: '18'
     
-      - name: Build Project
-        run: npm run build
+      # - name: Build Project
+      #   run: npm run build
 
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v4
