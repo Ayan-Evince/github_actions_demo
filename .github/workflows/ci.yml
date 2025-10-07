@@ -32,23 +32,23 @@ jobs:
       - name: Run a sample script
         run: echo "✅ Workflow is working even without Node!"
 
-  deploy: 
-    needs: build
-    runs-on: ubuntu-latest
-    steps: 
-      - name: Checkout code
-        uses: actions/checkout@v4
+  # deploy: 
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps: 
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '18'
     
-      - name: Build Project
-        run: npm run build
+  #     - name: Build Project
+  #       run: npm run build
 
-      - name: Deploy to Github Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          publish_dir: ./
+  #     - name: Deploy to Github Pages
+  #       uses: peaceiris/actions-gh-pages@v4
+  #       with:
+  #         github_token: ${{secrets.GITHUB_TOKEN}}
+  #         publish_dir: ./
