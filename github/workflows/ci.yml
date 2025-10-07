@@ -1,0 +1,54 @@
+name: CI Pipeline
+
+# Triggers
+on:
+  push:
+    branches:
+      - main
+    pull_request:
+      branches:
+        - main
+
+# Jobs
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: '18'
+
+      # - name: Install dependencies
+      #   run: npm install
+
+      # - name: Run tests
+      #   run: npm test
+
+      - name: Run a sample script
+        run: echo "✅ Workflow is working even without Node!"
+
+deploy: 
+  needs: build
+  runs-on: ubuntu-latest
+  steps: 
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Build Project
+      run: npm run build
+
+    - name: Deploy to Github Pages
+      uses: peaceiris/actions-gh-pages@v5
+      with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
+        publish_dir: ./dist
